@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BR Modern School Pauri Computational Thinking and AI Readiness English Learning Lab">
+<title>BR Modern School Pauri | CT & AI Learning Lab</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- LOGO SIZE ONLY -->
+<style>
+.school-logo {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.school-logo img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="background">
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+  <div class="orb orb-three"></div>
+  <div class="grid-overlay"></div>
+  <div class="floating-code code-one">&lt;/&gt;</div>
+  <div class="floating-code code-two">{ }</div>
+  <div class="floating-code code-three">AI</div>
+  <div class="floating-code code-four">01</div>
+</div>
+
+<header class="top-header">
+  <div class="brand">
+
+    <!-- SCHOOL LOGO -->
+    <div class="school-logo">
+      <img src="school-logo.png"
+           alt="BR Modern School Pauri Logo">
+    </div>
+
+    <div>
+      <h1>BR Modern School Pauri</h1>
+      <p>Computational Thinking • AI Readiness • English</p>
+    </div>
+
+  </div>
+
+  <div class="header-badge">
+    <span class="live-dot"></span>
+    Interactive Learning Lab
+  </div>
+</header>
+
+<nav class="activity-navigation">
+
+  <button class="activity-tab active" type="button" onclick="show('home')">
+    <span class="tab-icon">⌂</span> Overview
+  </button>
+
+  <button class="activity-tab" type="button" onclick="show('student')">
+    <span class="tab-icon">👤</span> Student Profile
+  </button>
+
+  <button class="activity-tab" type="button" onclick="show('activities')">
+    <span class="tab-icon">✦</span> Activities
+  </button>
+
+  <button class="activity-tab" type="button" onclick="show('progress')">
+    <span class="tab-icon">◔</span> Progress
+  </button>
+
+  <button class="activity-tab" type="button" onclick="show('feedback')">
+    <span class="tab-icon">⭐</span> Feedback
+  </button>
+
+</nav>
+
+<main>
+
+<!-- =========================================================
+     HOME
+========================================================= -->
+
+<section id="home" class="page page-section active">
+
+  <div class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        <span>✦</span> CLASSROOM INNOVATION
+      </div>
+
+      <h2>
+        Think. <span>Sequence.</span> Debug. <strong>Interact.</strong>
+      </h2>
+
+      <p>
+        Explore how English classroom activities can develop Computational
+        Thinking and prepare learners for an AI-ready future.
+      </p>
+
+      <div class="hero-pills">
+        <span>🧠 Computational Thinking</span>
+        <span>🤖 AI Readiness</span>
+        <span>📚 English Learning</span>
+      </div>
+
+      <button class="primary-button" type="button" onclick="show('student')">
+        Start Learning →
+      </button>
+
+    </div>
+
+    <div class="hero-visual">
+
+      <div class="brain-orbit orbit-a"></div>
+      <div class="brain-orbit orbit-b"></div>
+
+      <div class="brain-core">
+        <div class="brain-icon">🧠</div>
+        <span>THINK</span>
+      </div>
+
+      <div class="node node-1">01</div>
+      <div class="node node-2">AI</div>
+      <div class="node node-3">CT</div>
+      <div class="node node-4">∞</div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-heading">
+    <div>
+
+      <span class="section-label">LEARNING JOURNEY</span>
+
+      <h2>
+        Five Challenges.
+        <span>One Thinking Skillset.</span>
+      </h2>
+
+      <p>
+        Break problems down, recognise patterns, sequence information,
+        debug errors and communicate with a rule-based chatbot.
+      </p>
+
+    </div>
+  </div>
+
+
+  <div class="activity-cards">
+
+    <article class="activity-card">
+      <div class="card-number">01</div>
+      <div class="card-icon">⏱️</div>
+      <h3>Time Pattern Sorter</h3>
+      <p>
+        Recognise time expressions, helping verbs and sentence patterns.
+      </p>
+
+      <div class="ct-tags">
+        <span>Pattern Recognition</span>
+        <span>Sequencing</span>
+      </div>
+
+      <button class="card-button" type="button" onclick="show('student')">
+        Start Activity →
+      </button>
+    </article>
+
+
+    <article class="activity-card">
+      <div class="card-number">02</div>
+      <div class="card-icon">🔎</div>
+      <h3>Time Detective</h3>
+      <p>
+        Decode time clues and select the sentence that fits logically.
+      </p>
+
+      <div class="ct-tags">
+        <span>Decomposition</span>
+        <span>Decision</span>
+      </div>
+
+      <button class="card-button" type="button" onclick="show('student')">
+        Start Activity →
+      </button>
+    </article>
+
+
+    <article class="activity-card">
+      <div class="card-number">03</div>
+      <div class="card-icon">🧩</div>
+      <h3>Story Sequencing</h3>
+      <p>
+        Arrange events in the correct order and build an algorithm-like sequence.
+      </p>
+
+      <div class="ct-tags">
+        <span>Sequencing</span>
+        <span>Algorithmic Thinking</span>
+      </div>
+
+      <button class="card-button" type="button" onclick="show('student')">
+        Start Activity →
+      </button>
+    </article>
+
+
+    <article class="activity-card">
+      <div class="card-number">04</div>
+      <div class="card-icon">🐞</div>
+      <h3>Grammar Debugger</h3>
+      <p>
+        Detect mistakes, identify the pattern and repair the sentence.
+      </p>
+
+      <div class="ct-tags">
+        <span>Debugging</span>
+        <span>Logical Reasoning</span>
+      </div>
+
+      <button class="card-button" type="button" onclick="show('student')">
+        Start Activity →
+      </button>
+    </article>
+
+
+    <article class="activity-card activity-ai">
+      <div class="card-number">AI</div>
+      <div class="card-icon">🤖</div>
+      <h3>Human Chatbot</h3>
+
+      <p>
+        Ask, process, reason and respond through a simple rule-based
+        human chatbot.
+      </p>
+
+      <div class="ct-tags">
+        <span>Instructions</span>
+        <span>AI Readiness</span>
+      </div>
+
+      <button class="card-button" type="button" onclick="show('student')">
+        Meet Sristi →
+      </button>
+    </article>
+
+  </div>
+
+
+  <div class="ct-pipeline">
+
+    <div class="pipeline-title">
+      <span>THE THINKING PROCESS</span>
+      <h3>From Problem → Solution</h3>
+    </div>
+
+    <div class="pipeline">
+
+      <div class="pipeline-step">
+        <div class="pipeline-icon">01</div>
+        <strong>Decompose</strong>
+        <small>Break it down</small>
+      </div>
+
+      <div class="pipeline-line"></div>
+
+      <div class="pipeline-step">
+        <div class="pipeline-icon">02</div>
+        <strong>Recognise</strong>
+        <small>Find patterns</small>
+      </div>
+
+      <div class="pipeline-line"></div>
+
+      <div class="pipeline-step">
+        <div class="pipeline-icon">03</div>
+        <strong>Sequence</strong>
+        <small>Arrange logically</small>
+      </div>
+
+      <div class="pipeline-line"></div>
+
+      <div class="pipeline-step">
+        <div class="pipeline-icon">04</div>
+        <strong>Debug</strong>
+        <small>Find & fix</small>
+      </div>
+
+      <div class="pipeline-line"></div>
+
+      <div class="pipeline-step">
+        <div class="pipeline-icon">05</div>
+        <strong>Interact</strong>
+        <small>Communicate</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     STUDENT PROFILE
+========================================================= -->
+
+<section id="student" class="page page-section">
+
+  <div class="section-heading">
+    <div>
+
+      <span class="section-label">
+        STEP 01 • STUDENT PROFILE
+      </span>
+
+      <h2>
+        Begin Your <span>Learning Journey</span>
+      </h2>
+
+      <p>
+        Enter your details once. Your activity scores and time records
+        will be stored in this browser for the learning session.
+      </p>
+
+    </div>
+  </div>
+
+
+  <div class="premium-panel profile-panel">
+
+    <div class="panel-badge">
+      STUDENT INPUT
+    </div>
+
+    <div class="grid2">
+
+      <label>
+        Student Name
+        <input id="studentName"
+               maxlength="60"
+               placeholder="Enter your name">
+      </label>
+
+      <label>
+        Class
+
+        <select id="studentClass">
+
+          <option value="">Select Class</option>
+
+          <option>Class 1</option>
+          <option>Class 2</option>
+          <option>Class 3</option>
+          <option>Class 4</option>
+          <option>Class 5</option>
+          <option>Class 6</option>
+          <option>Class 7</option>
+          <option>Class 8</option>
+          <option>Class 9</option>
+          <option>Class 10</option>
+          <option>Class 11</option>
+          <option>Class 12</option>
+
+        </select>
+
+      </label>
+
+      <label>
+        Section
+        <input id="section"
+               maxlength="5"
+               placeholder="e.g. A">
+      </label>
+
+      <label>
+        Roll Number
+        <input id="roll"
+               maxlength="10"
+               placeholder="Optional">
+      </label>
+
+    </div>
+
+    <button class="primary-button"
+            type="button"
+            onclick="begin()">
+      Continue to Learning Path →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     ACTIVITIES
+========================================================= -->
+
+<section id="activities" class="page page-section">
+
+  <div class="section-heading">
+
+    <div>
+
+      <span class="section-label">
+        LEARNING PATH
+      </span>
+
+      <h2>
+        Choose Your <span>Challenge</span>
+      </h2>
+
+      <p>
+        Activities 1–4 contain three learning levels.
+        The Human Chatbot opens directly as a chatbot challenge.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="activity-cards">
+
+    <article class="activity-card">
+
+      <div class="card-number">01</div>
+      <div class="card-icon">⏱️</div>
+
+      <h3>Time Pattern Sorter</h3>
+
+      <p>
+        Classify time expressions and identify tense patterns.
+      </p>
+
+      <div class="ct-tags">
+        <span>Level 1–3</span>
+        <span>Stopwatch</span>
+      </div>
+
+      <button class="card-button"
+              type="button"
+              onclick="openAct(1)">
+        Start →
+      </button>
+
+    </article>
+
+
+    <article class="activity-card">
+
+      <div class="card-number">02</div>
+      <div class="card-icon">🔎</div>
+
+      <h3>Time Detective</h3>
+
+      <p>
+        Decode a time clue and situation to select the best sentence.
+      </p>
+
+      <div class="ct-tags">
+        <span>Level 1–3</span>
+        <span>Decision</span>
+      </div>
+
+      <button class="card-button"
+              type="button"
+              onclick="openAct(2)">
+        Start →
+      </button>
+
+    </article>
+
+
+    <article class="activity-card">
+
+      <div class="card-number">03</div>
+      <div class="card-icon">🧩</div>
+
+      <h3>Story Sequencing Challenge</h3>
+
+      <p>
+        Drag eight sentence strips into a logical sequence.
+      </p>
+
+      <div class="ct-tags">
+        <span>Level 1–3</span>
+        <span>Algorithm</span>
+      </div>
+
+      <button class="card-button"
+              type="button"
+              onclick="openAct(3)">
+        Start →
+      </button>
+
+    </article>
+
+
+    <article class="activity-card">
+
+      <div class="card-number">04</div>
+      <div class="card-icon">🐞</div>
+
+      <h3>Grammar Debugger</h3>
+
+      <p>
+        Find, fix and evaluate grammatical errors.
+      </p>
+
+      <div class="ct-tags">
+        <span>Level 1–3</span>
+        <span>Debugging</span>
+      </div>
+
+      <button class="card-button"
+              type="button"
+              onclick="openAct(4)">
+        Start →
+      </button>
+
+    </article>
+
+
+    <article class="activity-card activity-ai">
+
+      <div class="card-number">AI</div>
+      <div class="card-icon">🤖</div>
+
+      <h3>Human Chatbot Challenge</h3>
+
+      <p>
+        Ask meaningful questions and examine how a rule-based
+        response system works.
+      </p>
+
+      <div class="ct-tags">
+        <span>AI Readiness</span>
+        <span>Stopwatch</span>
+      </div>
+
+      <button class="card-button"
+              type="button"
+              onclick="openAct(5)">
+        Enter AI Lab →
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     GAME
+========================================================= -->
+
+<section id="game" class="page page-section">
+
+  <div class="activity-header">
+
+    <div>
+
+      <span id="phase" class="section-label"></span>
+
+      <h2 id="gameTitle">
+        Challenge
+      </h2>
+
+      <p id="gameMeta">
+        Choose a level • complete the challenge • review your score
+      </p>
+
+    </div>
+
+    <div class="score-box timer-box">
+
+      <small>STOPWATCH</small>
+
+      <strong id="timer">
+        00:00
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div id="levelBar" class="level-bar">
+
+    <span>CHOOSE LEVEL</span>
+
+    <button type="button" onclick="startLevel(1)">
+      LEVEL 1
+    </button>
+
+    <button type="button" onclick="startLevel(2)">
+      LEVEL 2
+    </button>
+
+    <button type="button" onclick="startLevel(3)">
+      LEVEL 3
+    </button>
+
+  </div>
+
+
+  <div id="gameArea" class="premium-panel">
+
+    <p class="muted">
+      Select a level to begin your challenge.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROGRESS
+========================================================= -->
+
+<section id="progress" class="page page-section">
+
+  <div class="section-heading">
+
+    <div>
+
+      <span class="section-label">
+        YOUR JOURNEY
+      </span>
+
+      <h2>
+        Progress <span>Dashboard</span>
+      </h2>
+
+      <p>
+        Review completed challenges, average performance and best scores.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div id="progressBox"
+       class="stats premium-stats">
+  </div>
+
+  <div id="progressDetails"
+       class="premium-panel progress-details">
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEEDBACK
+========================================================= -->
+
+<section id="feedback" class="page page-section">
+
+  <div class="activity-header">
+
+    <div>
+
+      <span class="section-label">
+        FEEDBACK CENTRE
+      </span>
+
+      <h2>
+        Student & Teacher <span>Voices</span>
+      </h2>
+
+      <p>
+        Share your experience and help document this classroom innovation.
+      </p>
+
+    </div>
+
+    <div class="score-box">
+
+      <small>FEEDBACK</small>
+
+      <strong>✦</strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="feedback-tabs">
+
+    <button class="tab active"
+            type="button"
+            onclick="feedbackTab('student',this)">
+      Student Feedback
+    </button>
+
+    <button class="tab"
+            type="button"
+            onclick="feedbackTab('teacher',this)">
+      Teacher Feedback
+    </button>
+
+    <button class="tab"
+            type="button"
+            onclick="feedbackTab('admin',this)">
+      🔐 Admin Login
+    </button>
+
+  </div>
+
+
+  <div id="studentFeedbackBox"
+       class="premium-panel feedback-box-panel">
+
+    <span class="section-label">
+      STUDENT VOICE
+    </span>
+
+    <h3>
+      How was your learning experience?
+    </h3>
+
+    <form id="studentFeedbackForm"
+          onsubmit="submitStudentFeedback(event)">
+
+      <div class="grid2">
+
+        <label>
+          Student Name
+
+          <input id="sfName"
+                 maxlength="60"
+                 required
+                 placeholder="Enter your name">
+        </label>
+
+
+        <label>
+          Class
+
+          <select id="sfClass" required>
+
+            <option value="">Select Class</option>
+
+            <option>Class 1</option>
+            <option>Class 2</option>
+            <option>Class 3</option>
+            <option>Class 4</option>
+            <option>Class 5</option>
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+            <option>Class 10</option>
+            <option>Class 11</option>
+            <option>Class 12</option>
+
+          </select>
+
+        </label>
+
+
+        <label>
+          Activity
+
+          <select id="sfActivity" required>
+
+            <option value="">Select Activity</option>
+
+            <option>Time Pattern Sorter</option>
+            <option>Time Detective</option>
+            <option>Story Sequencing Challenge</option>
+            <option>Grammar Debugger</option>
+            <option>Human Chatbot Challenge</option>
+
+          </select>
+
+        </label>
+
+
+        <label>
+          Level
+
+          <select id="sfLevel" required>
+
+            <option value="">Select Level</option>
+
+            <option>Level 1</option>
+            <option>Level 2</option>
+            <option>Level 3</option>
+            <option>Not Applicable - Human Chatbot</option>
+
+          </select>
+
+        </label>
+
+
+        <label>
+          Rating
+
+          <select id="sfRating" required>
+
+            <option value="">Select Rating</option>
+
+            <option>1 - Poor</option>
+            <option>2 - Fair</option>
+            <option>3 - Good</option>
+            <option>4 - Very Good</option>
+            <option>5 - Excellent</option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <label>
+
+        Student Review
+
+        <textarea id="sfFeedback"
+                  maxlength="1000"
+                  rows="5"
+                  required
+                  placeholder="What did you like about the activity?"></textarea>
+
+      </label>
+
+
+      <button class="primary-button"
+              type="submit">
+        Submit Student Feedback →
+      </button>
+
+      <div id="studentFeedbackMsg"></div>
+
+    </form>
+
+  </div>
+
+
+  <div id="teacherFeedbackBox"
+       class="premium-panel feedback-box-panel"
+       style="display:none">
+
+    <span class="section-label">
+      TEACHER VOICE
+    </span>
+
+    <h3>
+      Classroom Innovation Review
+    </h3>
+
+    <form id="teacherFeedbackForm"
+          onsubmit="submitTeacherFeedback(event)">
+
+      <div class="grid2">
+
+        <label>
+
+          School Name
+
+          <select id="school" required>
+
+            <option value="">
+              Select School
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <label>
+
+          Designation
+
+          <select id="designation" required>
+
+            <option value="">
+              Select Designation
+            </option>
+
+            <option>Principal</option>
+            <option>Vice Principal</option>
+            <option>PGT</option>
+            <option>TGT</option>
+            <option>PRT</option>
+            <option>Teacher</option>
+            <option>Coordinator</option>
+            <option>Other</option>
+
+          </select>
+
+        </label>
+
+
+        <label>
+
+          Rating
+
+          <select id="rating" required>
+
+            <option value="">
+              Select Rating
+            </option>
+
+            <option>1 - Poor</option>
+            <option>2 - Fair</option>
+            <option>3 - Good</option>
+            <option>4 - Very Good</option>
+            <option>5 - Excellent</option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <label>
+
+        Teacher Feedback
+
+        <textarea id="feedbackText"
+                  maxlength="1500"
+                  rows="6"
+                  required
+                  placeholder="Write your feedback, observation or suggestion..."></textarea>
+
+      </label>
+
+
+      <label class="check">
+
+        <input type="checkbox"
+               id="remember">
+
+        Remember school and designation on this device
+
+      </label>
+
+
+      <button class="primary-button"
+              type="submit">
+        Submit Teacher Feedback →
+      </button>
+
+      <div id="feedbackMsg"></div>
+
+    </form>
+
+  </div>
+
+
+  <div id="adminLoginBox"
+       class="premium-panel feedback-box-panel"
+       style="display:none">
+
+    <span class="section-label">
+      RESTRICTED AREA
+    </span>
+
+    <h3>
+      Administrator Login
+    </h3>
+
+    <p class="muted">
+      Authorised access only. Admin records open in the separate
+      management page.
+    </p>
+
+    <form onsubmit="adminLogin(event)"
+          autocomplete="off">
+
+      <label>
+
+        Admin Password
+
+        <input type="password"
+               id="adminPassword"
+               maxlength="100"
+               autocomplete="current-password"
+               required
+               placeholder="Enter admin password">
+
+      </label>
+
+      <button class="primary-button"
+              type="submit">
+        Login to Admin Panel →
+      </button>
+
+    </form>
+
+    <div id="adminLoginMsg"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULT
+========================================================= -->
+
+<section id="result" class="page page-section">
+
+  <div class="result-card">
+
+    <span class="section-label">
+      CHALLENGE COMPLETE
+    </span>
+
+    <h2 id="resultHeading">
+      Excellent Work!
+    </h2>
+
+    <div class="bigScore" id="finalScore">
+      0%
+    </div>
+
+    <div class="result-grid">
+
+      <div>
+        <small>CORRECT</small>
+        <strong id="correct">0 / 0</strong>
+      </div>
+
+      <div>
+        <small>TIME TAKEN</small>
+        <strong id="finalTime">00:00</strong>
+      </div>
+
+      <div>
+        <small>LEVEL</small>
+        <strong id="finalLevel">Level 1</strong>
+      </div>
+
+    </div>
+
+    <p id="resultMessage" class="muted"></p>
+
+    <!-- RESPONSE REVIEW -->
+    <div id="responseReview"></div>
+
+    <div class="result-actions">
+
+      <button class="primary-button"
+              type="button"
+              onclick="nextFromResult()"
+              id="resultNext">
+        Next →
+      </button>
+
+      <button class="secondary-button"
+              type="button"
+              onclick="show('activities')">
+        Learning Path
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     REFLECTION
+========================================================= -->
+
+<section class="reflection-section">
+
+  <div class="reflection-content">
+
+    <span class="section-label">
+      FINAL REFLECTION
+    </span>
+
+    <h2>
+      Can you <span>think like a machine</span>
+      without becoming one?
+    </h2>
+
+    <p>
+      Computational Thinking does not teach students to become computers.
+      It teaches them to become better problem-solvers.
+    </p>
+
+    <div class="reflection-points">
+
+      <div>✓ Break complex problems</div>
+      <div>✓ Recognise patterns</div>
+      <div>✓ Create logical sequences</div>
+      <div>✓ Find and fix errors</div>
+      <div>✓ Communicate with technology</div>
+
+    </div>
+
+  </div>
+
+
+  <div class="reflection-mark">
+
+    <span>CT</span>
+    <small>THINKING</small>
+
+  </div>
+
+</section>
+
+
+<span id="patternCount" hidden>
+  1000+
+</span>
+
+</main>
+
+
+<footer>
+
+  <strong>BR Modern School Pauri</strong>
+
+  <span>•</span>
+
+  Computational Thinking & AI Readiness
+
+  <span>•</span>
+
+  English Classroom Innovation
+
+</footer>
+
+
+<!-- =========================================================
+     CLASS PHOTOS & VIDEOS
+========================================================= -->
+
+<section id="class-media-qr">
+
+  <div class="media-label">
+    CLASS MEDIA
+  </div>
+
+  <h2>
+    📸 Class Photos & Videos
+  </h2>
+
+  <p>
+    Scan the QR code or click it to view our classroom memories.
+  </p>
+
+  <a
+    href="https://drive.google.com/drive/folders/1TKROa1zMEdNvEfFVKS_uw_Q30k8C-ehL?usp=drive_link"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="qr-card"
+  >
+
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1TKROa1zMEdNvEfFVKS_uw_Q30k8C-ehL%3Fusp%3Ddrive_link"
+      alt="QR Code for Class Photos and Videos"
+    >
+
+  </a>
+
+  <p class="scan-text">
+    📱 Scan with your phone camera
+  </p>
+
+</section>
+
+
+<style>
+
+#class-media-qr {
+    max-width: 1100px;
+    margin: 70px auto 40px;
+    padding: 55px 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 28px;
+    background: rgba(15,24,48,.72);
+    box-shadow: 0 30px 80px rgba(0,0,0,.30);
+    backdrop-filter: blur(18px);
+}
+
+#class-media-qr .media-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    color: #6ee7ff;
+    margin-bottom: 12px;
+}
+
+#class-media-qr h2 {
+    margin: 0 0 12px;
+    font-size: clamp(28px,4vw,42px);
+    color: #f4f7ff;
+}
+
+#class-media-qr > p {
+    color: #9ba8c5;
+    margin-bottom: 28px;
+}
+
+#class-media-qr .qr-card {
+    display: inline-block;
+    padding: 18px;
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 20px 55px rgba(0,0,0,.35);
+    transition: .3s ease;
+}
+
+#class-media-qr .qr-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 25px 65px rgba(110,231,255,.20);
+}
+
+#class-media-qr .qr-card img {
+    display: block;
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+}
+
+#class-media-qr .scan-text {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #9ba8c5;
+}
+
+@media(max-width:600px) {
+
+    #class-media-qr {
+        margin: 45px 15px 30px;
+        padding: 40px 18px;
+    }
+
+    #class-media-qr .qr-card img {
+        width: 190px;
+        height: 190px;
+    }
+
+}
+
+</style>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
