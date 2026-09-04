@@ -1,0 +1,3255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="BR Modern School Pauri CT & AI Learning Lab Admin Dashboard">
+
+<title>CT & AI Learning Lab | Admin Dashboard</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
+
+.admin-page {
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.admin-container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.admin-header {
+    margin-bottom: 25px;
+}
+
+.admin-header h1 {
+    margin-bottom: 6px;
+}
+
+.admin-header p {
+    opacity: .75;
+}
+
+.admin-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.admin-nav button {
+    border: 0;
+    cursor: pointer;
+    padding: 11px 18px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.08);
+    color: inherit;
+    font-weight: 600;
+}
+
+.admin-nav button:hover {
+    background: rgba(255,255,255,.16);
+}
+
+.admin-section {
+    display: none;
+}
+
+.admin-section.active {
+    display: block;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(12px);
+}
+
+.stat-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    opacity: .75;
+}
+
+.stat-card strong {
+    font-size: 30px;
+}
+
+.admin-card {
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(12px);
+    margin-bottom: 22px;
+}
+
+.admin-card h2 {
+    margin-top: 0;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    white-space: nowrap;
+}
+
+.admin-table th {
+    font-size: 13px;
+    opacity: .75;
+}
+
+.admin-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.admin-controls input,
+.admin-controls select {
+    padding: 11px 13px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.08);
+    color: inherit;
+}
+
+.admin-btn {
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.admin-btn-danger {
+    background: #b42318;
+    color: white;
+}
+
+.admin-btn-success {
+    background: #16794c;
+    color: white;
+}
+
+.admin-btn-primary {
+    background: #315efb;
+    color: white;
+}
+
+.empty-state {
+    padding: 30px;
+    text-align: center;
+    opacity: .65;
+}
+
+.blocked {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.blocked-box {
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(15px);
+}
+
+.loading {
+    padding: 25px;
+    text-align: center;
+    opacity: .7;
+}
+
+@media(max-width:700px) {
+
+    .admin-page {
+        padding: 15px;
+    }
+
+    .admin-card {
+        padding: 15px;
+    }
+
+    .admin-nav button {
+        flex: 1 1 auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     AUTH BLOCK
+========================================================= -->
+
+<div id="blockedScreen"
+     class="blocked"
+     style="display:none;">
+
+    <div class="blocked-box">
+
+        <h2>Admin Access Required</h2>
+
+        <p>
+            Please login from the CT & AI Learning Lab
+            feedback section.
+        </p>
+
+        <a href="../index.html#feedback">
+            Go to Login
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN ADMIN PAGE
+========================================================= -->
+
+<div id="adminPage"
+     class="admin-page"
+     style="display:none;">
+
+<div class="admin-container">
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<div class="admin-header">
+
+    <h1>
+        BR Modern School Pauri
+    </h1>
+
+    <h2>
+        CT & AI Learning Lab — Admin Dashboard
+    </h2>
+
+    <p>
+        Central student performance, activity and feedback
+        monitoring system.
+    </p>
+
+</div>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<div class="admin-nav">
+
+    <button onclick="showSection('dashboardHome')">
+        Dashboard
+    </button>
+
+    <button onclick="showSection('activities')">
+        Activities
+    </button>
+
+    <button onclick="showSection('students')">
+        Students
+    </button>
+
+    <button onclick="showSection('classes')">
+        Classes
+    </button>
+
+    <button onclick="showSection('studentFeedback')">
+        Student Feedback
+    </button>
+
+    <button onclick="showSection('teacherFeedback')">
+        Teacher Feedback
+    </button>
+
+    <button onclick="showSection('exports')">
+        Exports
+    </button>
+
+    <button
+        class="admin-btn admin-btn-danger"
+        onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section id="dashboardHome"
+         class="admin-section active">
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Total Activity Attempts</h3>
+            <strong id="totalResults">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <h3>Students</h3>
+            <strong id="totalStudents">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <h3>Average Score</h3>
+            <strong id="averageScore">0%</strong>
+        </div>
+
+        <div class="stat-card">
+            <h3>Best Score</h3>
+            <strong id="bestScore">0%</strong>
+        </div>
+
+        <div class="stat-card">
+            <h3>Student Feedback</h3>
+            <strong id="totalStudentFeedback">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <h3>Teacher Feedback</h3>
+            <strong id="totalTeacherFeedback">0</strong>
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY PERFORMANCE -->
+
+    <div class="admin-card">
+
+        <h2>Activity Performance</h2>
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Activity</th>
+                        <th>Attempts</th>
+                        <th>Average</th>
+                        <th>Best</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="activityPerformanceBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOP STUDENTS -->
+
+    <div class="admin-card">
+
+        <h2>Top Students</h2>
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Attempts</th>
+                        <th>Average</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="topStudentsBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- CLASS PERFORMANCE -->
+
+    <div class="admin-card">
+
+        <h2>Class Performance</h2>
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Class</th>
+                        <th>Students</th>
+                        <th>Attempts</th>
+                        <th>Average</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="classPerformanceBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT -->
+
+    <div class="admin-card">
+
+        <h2>Recent Activity</h2>
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Activity</th>
+                        <th>Level</th>
+                        <th>Score</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="recentActivityBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ACTIVITIES
+========================================================= -->
+
+<section id="activities"
+         class="admin-section">
+
+    <div class="admin-card">
+
+        <h2>Student Activity Reports</h2>
+
+        <div class="admin-controls">
+
+            <select id="activityFilter">
+                <option value="">All Activities</option>
+            </select>
+
+            <select id="classFilter">
+                <option value="">All Classes</option>
+            </select>
+
+            <select id="levelFilter">
+                <option value="">All Levels</option>
+            </select>
+
+            <input
+                id="dateFilter"
+                type="date">
+
+            <button
+                class="admin-btn admin-btn-primary"
+                onclick="renderActivityReports()">
+                Apply Filter
+            </button>
+
+            <button
+                class="admin-btn"
+                onclick="resetActivityFilters()">
+                Reset
+            </button>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Roll</th>
+                        <th>Activity</th>
+                        <th>Level</th>
+                        <th>Score</th>
+                        <th>Correct</th>
+                        <th>Time</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="activityReportsBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STUDENTS
+========================================================= -->
+
+<section id="students"
+         class="admin-section">
+
+    <div class="admin-card">
+
+        <h2>Student Performance</h2>
+
+        <div class="admin-controls">
+
+            <select id="studentClassFilter">
+
+                <option value="">
+                    All Classes
+                </option>
+
+            </select>
+
+            <input
+                id="studentSearch"
+                type="text"
+                placeholder="Search student...">
+
+            <button
+                class="admin-btn admin-btn-primary"
+                onclick="renderStudentPerformance()">
+                Search
+            </button>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Roll</th>
+                        <th>Attempts</th>
+                        <th>Average</th>
+                        <th>Best</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="studentPerformanceBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CLASSES
+========================================================= -->
+
+<section id="classes"
+         class="admin-section">
+
+    <div class="admin-card">
+
+        <h2>Class-wise Report</h2>
+
+        <div class="admin-controls">
+
+            <select id="classReportFilter">
+
+                <option value="">
+                    All Classes
+                </option>
+
+            </select>
+
+            <button
+                class="admin-btn admin-btn-primary"
+                onclick="renderClassReport()">
+                Generate Report
+            </button>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Class</th>
+                        <th>Students</th>
+                        <th>Total Attempts</th>
+                        <th>Average Score</th>
+                        <th>Best Score</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="classReportBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STUDENT FEEDBACK
+========================================================= -->
+
+<section id="studentFeedback"
+         class="admin-section">
+
+    <div class="admin-card">
+
+        <h2>Student Feedback</h2>
+
+        <div class="admin-controls">
+
+            <select id="feedbackClassFilter">
+
+                <option value="">
+                    All Classes
+                </option>
+
+            </select>
+
+            <button
+                class="admin-btn admin-btn-success"
+                onclick="exportStudentFeedback()">
+                Export CSV
+            </button>
+
+            <button
+                class="admin-btn admin-btn-danger"
+                onclick="clearData('studentFeedback')">
+                Clear All
+            </button>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Activity</th>
+                        <th>Level</th>
+                        <th>Rating</th>
+                        <th>Review</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="studentFeedbackBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TEACHER FEEDBACK
+========================================================= -->
+
+<section id="teacherFeedback"
+         class="admin-section">
+
+    <div class="admin-card">
+
+        <h2>Teacher Feedback</h2>
+
+        <div class="admin-controls">
+
+            <button
+                class="admin-btn admin-btn-success"
+                onclick="exportTeacherFeedback()">
+                Export CSV
+            </button>
+
+            <button
+                class="admin-btn admin-btn-danger"
+                onclick="clearData('teacherFeedback')">
+                Clear All
+            </button>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>School</th>
+                        <th>Designation</th>
+                        <th>Rating</th>
+                        <th>Feedback</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="teacherFeedbackBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EXPORTS
+========================================================= -->
+
+<section id="exports"
+         class="admin-section">
+
+    <div class="admin-card">
+
+        <h2>Export & Data Management</h2>
+
+        <div class="admin-controls">
+
+            <button
+                class="admin-btn admin-btn-success"
+                onclick="exportResults()">
+                Export Activity Results CSV
+            </button>
+
+            <button
+                class="admin-btn admin-btn-success"
+                onclick="exportStudentFeedback()">
+                Export Student Feedback CSV
+            </button>
+
+            <button
+                class="admin-btn admin-btn-success"
+                onclick="exportTeacherFeedback()">
+                Export Teacher Feedback CSV
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-card">
+
+        <h2>Danger Zone</h2>
+
+        <p>
+            Clearing activity records will remove the
+            central activity results from Supabase.
+        </p>
+
+        <button
+            class="admin-btn admin-btn-danger"
+            onclick="clearCentralActivityRecords()">
+            Clear All Activity Records
+        </button>
+
+    </div>
+
+</section>
+
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const AUTH_KEY =
+    "ctAdminAuthenticated";
+
+const SF =
+    "ctStudentFeedback";
+
+const TF =
+    "ctTeacherFeedback";
+
+const RK =
+    "ctResults";
+
+
+/*
+ * SUPABASE REST API
+ */
+
+const SUPABASE_URL =
+    "https://bvqfeefygbpcdcnmgdrz.supabase.co/rest/v1";
+
+
+/*
+ * IMPORTANT:
+ * YAHAN WAHI PUBLISHABLE KEY PASTE KARO
+ * JO script.js MEIN ALREADY USE KI HAI.
+ */
+
+const SUPABASE_KEY =
+    "YOUR_PUBLISHABLE_KEY_HERE";
+
+
+let centralResults = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function $(id) {
+
+    return document.getElementById(id);
+
+}
+
+
+function get(key) {
+
+    if (key === RK) {
+
+        return centralResults;
+
+    }
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(key)
+        ) || [];
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+function esc(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function displayDate(value) {
+
+    if (!value) return "";
+
+    const d =
+        new Date(value);
+
+    if (isNaN(d.getTime())) {
+
+        return String(value);
+
+    }
+
+    return d.toLocaleString();
+
+}
+
+
+function time(ms) {
+
+    if (!ms && ms !== 0) {
+
+        return "";
+
+    }
+
+    const totalSeconds =
+        Math.floor(Number(ms) / 1000);
+
+    const minutes =
+        Math.floor(totalSeconds / 60);
+
+    const seconds =
+        totalSeconds % 60;
+
+    return (
+        String(minutes).padStart(2, "0")
+        + ":"
+        +
+        String(seconds).padStart(2, "0")
+    );
+
+}
+
+
+function supabaseHeaders() {
+
+    return {
+
+        "apikey":
+            SUPABASE_KEY,
+
+        "Authorization":
+            "Bearer " + SUPABASE_KEY,
+
+        "Content-Type":
+            "application/json"
+
+    };
+
+}
+
+
+/* =========================================================
+   LOAD CENTRAL SUPABASE RESULTS
+========================================================= */
+
+async function loadCentralResults() {
+
+    try {
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/ct_results?select=*&order=id.asc",
+                {
+                    method: "GET",
+                    headers: supabaseHeaders()
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Supabase HTTP " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        centralResults =
+            data.map(function(row) {
+
+                return {
+
+                    remoteId:
+                        row.id,
+
+                    id:
+                        row.id,
+
+                    date:
+                        row.date,
+
+                    studentName:
+                        row.student_name,
+
+                    className:
+                        row.class_name,
+
+                    section:
+                        row.section,
+
+                    roll:
+                        row.roll,
+
+                    activity:
+                        row.activity,
+
+                    activityName:
+                        row.activity_name,
+
+                    level:
+                        row.level,
+
+                    score:
+                        Number(row.score) || 0,
+
+                    correct:
+                        Number(row.correct) || 0,
+
+                    total:
+                        Number(row.total) || 0,
+
+                    time:
+                        Number(row.time) || 0
+
+                };
+
+            });
+
+
+        console.log(
+            "Central results loaded:",
+            centralResults.length
+        );
+
+
+        localStorage.setItem(
+            RK,
+            JSON.stringify(centralResults)
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Supabase load failed:",
+            error
+        );
+
+
+        /*
+         * FALLBACK TO LOCAL DATA
+         */
+
+        try {
+
+            centralResults =
+                JSON.parse(
+                    localStorage.getItem(RK)
+                ) || [];
+
+        } catch {
+
+            centralResults = [];
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+async function refreshResults() {
+
+    await loadCentralResults();
+
+    loadAllViews();
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showSection(id) {
+
+    document
+        .querySelectorAll(".admin-section")
+        .forEach(function(section) {
+
+            section.classList.remove("active");
+
+        });
+
+
+    const section =
+        $(id);
+
+
+    if (section) {
+
+        section.classList.add("active");
+
+    }
+
+
+    if (id === "dashboardHome") {
+
+        renderDashboard();
+
+    }
+
+    if (id === "activities") {
+
+        renderActivityFilters();
+
+        renderActivityReports();
+
+    }
+
+    if (id === "students") {
+
+        renderStudentFilters();
+
+        renderStudentPerformance();
+
+    }
+
+    if (id === "classes") {
+
+        renderClassFilters();
+
+        renderClassReport();
+
+    }
+
+    if (id === "studentFeedback") {
+
+        renderStudentFeedback();
+
+    }
+
+    if (id === "teacherFeedback") {
+
+        renderTeacherFeedback();
+
+    }
+
+}
+
+
+/* =========================================================
+   UNIQUE VALUES
+========================================================= */
+
+function uniqueValues(
+    field
+) {
+
+    return [
+        ...new Set(
+            centralResults
+                .map(function(x) {
+
+                    return x[field];
+
+                })
+                .filter(Boolean)
+        )
+    ];
+
+}
+
+
+/* =========================================================
+   FILL SELECT
+========================================================= */
+
+function fillSelect(
+    selectId,
+    values,
+    firstText
+) {
+
+    const select =
+        $(selectId);
+
+    if (!select) return;
+
+
+    select.innerHTML =
+        '<option value="">' +
+        firstText +
+        '</option>';
+
+
+    values
+        .sort(function(a, b) {
+
+            return String(a)
+                .localeCompare(String(b));
+
+        })
+        .forEach(function(value) {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                value;
+
+            option.textContent =
+                value;
+
+            select.appendChild(option);
+
+        });
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard() {
+
+    const data =
+        centralResults;
+
+
+    const total =
+        data.length;
+
+
+    const students =
+        new Set(
+            data
+                .map(x => x.studentName)
+                .filter(Boolean)
+        );
+
+
+    const scores =
+        data.map(x =>
+            Number(x.score) || 0
+        );
+
+
+    const average =
+        scores.length
+            ? Math.round(
+                scores.reduce(
+                    (a, b) => a + b,
+                    0
+                ) / scores.length
+            )
+            : 0;
+
+
+    const best =
+        scores.length
+            ? Math.max(...scores)
+            : 0;
+
+
+    $("totalResults").textContent =
+        total;
+
+    $("totalStudents").textContent =
+        students.size;
+
+    $("averageScore").textContent =
+        average + "%";
+
+    $("bestScore").textContent =
+        best + "%";
+
+
+    renderActivityPerformance();
+
+    renderTopStudents();
+
+    renderClassPerformance();
+
+    renderRecentActivity();
+
+}
+
+
+/* =========================================================
+   ACTIVITY PERFORMANCE
+========================================================= */
+
+function renderActivityPerformance() {
+
+    const body =
+        $("activityPerformanceBody");
+
+    body.innerHTML = "";
+
+
+    const map = {};
+
+
+    centralResults.forEach(function(x) {
+
+        const key =
+            x.activityName ||
+            x.activity ||
+            "Unknown";
+
+
+        if (!map[key]) {
+
+            map[key] = {
+
+                count: 0,
+                total: 0,
+                best: 0
+
+            };
+
+        }
+
+
+        map[key].count++;
+
+        map[key].total +=
+            Number(x.score) || 0;
+
+        map[key].best =
+            Math.max(
+                map[key].best,
+                Number(x.score) || 0
+            );
+
+    });
+
+
+    const rows =
+        Object.entries(map);
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="4" class="empty-state">' +
+            'No activity data available.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function([name, item]) {
+
+        const average =
+            Math.round(
+                item.total / item.count
+            );
+
+
+        body.innerHTML +=
+            "<tr>" +
+
+            "<td>" +
+            esc(name) +
+            "</td>" +
+
+            "<td>" +
+            item.count +
+            "</td>" +
+
+            "<td>" +
+            average +
+            "%</td>" +
+
+            "<td>" +
+            item.best +
+            "%</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   TOP STUDENTS
+========================================================= */
+
+function renderTopStudents() {
+
+    const body =
+        $("topStudentsBody");
+
+    body.innerHTML = "";
+
+
+    const map = {};
+
+
+    centralResults.forEach(function(x) {
+
+        const key =
+            [
+                x.studentName,
+                x.className,
+                x.section
+            ].join("|");
+
+
+        if (!map[key]) {
+
+            map[key] = {
+
+                student:
+                    x.studentName,
+
+                className:
+                    x.className,
+
+                section:
+                    x.section,
+
+                count: 0,
+
+                total: 0
+
+            };
+
+        }
+
+
+        map[key].count++;
+
+        map[key].total +=
+            Number(x.score) || 0;
+
+    });
+
+
+    const rows =
+        Object.values(map)
+            .map(function(x) {
+
+                return {
+
+                    ...x,
+
+                    average:
+                        Math.round(
+                            x.total / x.count
+                        )
+
+                };
+
+            })
+            .sort(function(a, b) {
+
+                return b.average -
+                    a.average;
+
+            })
+            .slice(0, 10);
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="5" class="empty-state">' +
+            'No student data available.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function(x) {
+
+        body.innerHTML +=
+            "<tr>" +
+
+            "<td>" +
+            esc(x.student) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.className) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.section) +
+            "</td>" +
+
+            "<td>" +
+            x.count +
+            "</td>" +
+
+            "<td>" +
+            x.average +
+            "%</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   CLASS PERFORMANCE
+========================================================= */
+
+function renderClassPerformance() {
+
+    const body =
+        $("classPerformanceBody");
+
+    body.innerHTML = "";
+
+
+    const map = {};
+
+
+    centralResults.forEach(function(x) {
+
+        const cls =
+            x.className ||
+            "Unknown";
+
+
+        if (!map[cls]) {
+
+            map[cls] = {
+
+                students:
+                    new Set(),
+
+                attempts: 0,
+
+                total: 0
+
+            };
+
+        }
+
+
+        if (x.studentName) {
+
+            map[cls]
+                .students
+                .add(x.studentName);
+
+        }
+
+
+        map[cls].attempts++;
+
+        map[cls].total +=
+            Number(x.score) || 0;
+
+    });
+
+
+    const rows =
+        Object.entries(map);
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="4" class="empty-state">' +
+            'No class data available.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function([cls, x]) {
+
+        const average =
+            x.attempts
+                ? Math.round(
+                    x.total /
+                    x.attempts
+                )
+                : 0;
+
+
+        body.innerHTML +=
+            "<tr>" +
+
+            "<td>" +
+            esc(cls) +
+            "</td>" +
+
+            "<td>" +
+            x.students.size +
+            "</td>" +
+
+            "<td>" +
+            x.attempts +
+            "</td>" +
+
+            "<td>" +
+            average +
+            "%</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY
+========================================================= */
+
+function renderRecentActivity() {
+
+    const body =
+        $("recentActivityBody");
+
+    body.innerHTML = "";
+
+
+    const rows =
+        [...centralResults]
+            .sort(function(a, b) {
+
+                return new Date(b.date) -
+                    new Date(a.date);
+
+            })
+            .slice(0, 15);
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="6" class="empty-state">' +
+            'No recent activity.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function(x) {
+
+        body.innerHTML +=
+            "<tr>" +
+
+            "<td>" +
+            esc(displayDate(x.date)) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.studentName) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.className) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.activityName) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.level) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.score) +
+            "%</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   ACTIVITY FILTERS
+========================================================= */
+
+function renderActivityFilters() {
+
+    fillSelect(
+        "activityFilter",
+        uniqueValues("activityName"),
+        "All Activities"
+    );
+
+
+    fillSelect(
+        "classFilter",
+        uniqueValues("className"),
+        "All Classes"
+    );
+
+
+    fillSelect(
+        "levelFilter",
+        uniqueValues("level"),
+        "All Levels"
+    );
+
+}
+
+
+function resetActivityFilters() {
+
+    $("activityFilter").value = "";
+
+    $("classFilter").value = "";
+
+    $("levelFilter").value = "";
+
+    $("dateFilter").value = "";
+
+    renderActivityReports();
+
+}
+
+
+/* =========================================================
+   ACTIVITY REPORTS
+========================================================= */
+
+function renderActivityReports() {
+
+    const body =
+        $("activityReportsBody");
+
+    if (!body) return;
+
+    body.innerHTML = "";
+
+
+    const activity =
+        $("activityFilter").value;
+
+    const cls =
+        $("classFilter").value;
+
+    const level =
+        $("levelFilter").value;
+
+    const date =
+        $("dateFilter").value;
+
+
+    let rows =
+        [...centralResults];
+
+
+    if (activity) {
+
+        rows =
+            rows.filter(x =>
+                String(x.activityName) ===
+                String(activity)
+            );
+
+    }
+
+
+    if (cls) {
+
+        rows =
+            rows.filter(x =>
+                String(x.className) ===
+                String(cls)
+            );
+
+    }
+
+
+    if (level) {
+
+        rows =
+            rows.filter(x =>
+                String(x.level) ===
+                String(level)
+            );
+
+    }
+
+
+    if (date) {
+
+        rows =
+            rows.filter(function(x) {
+
+                return String(x.date)
+                    .startsWith(date);
+
+            });
+
+    }
+
+
+    rows.sort(function(a, b) {
+
+        return new Date(b.date) -
+            new Date(a.date);
+
+    });
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="11" class="empty-state">' +
+            'No records found.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function(x) {
+
+        body.innerHTML +=
+
+            "<tr>" +
+
+            "<td>" +
+            esc(displayDate(x.date)) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.studentName) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.className) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.section) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.roll) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.activityName) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.level) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.score) +
+            "%</td>" +
+
+            "<td>" +
+            esc(x.correct) +
+            " / " +
+            esc(x.total) +
+            "</td>" +
+
+            "<td>" +
+            esc(time(x.time)) +
+            "</td>" +
+
+            "<td>" +
+
+            "<button " +
+            'class="admin-btn admin-btn-danger" ' +
+            'onclick="deleteActivityById(' +
+            x.remoteId +
+            ')">' +
+            "Delete" +
+            "</button>" +
+
+            "</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   STUDENT FILTERS
+========================================================= */
+
+function renderStudentFilters() {
+
+    fillSelect(
+        "studentClassFilter",
+        uniqueValues("className"),
+        "All Classes"
+    );
+
+}
+
+
+function renderStudentPerformance() {
+
+    const body =
+        $("studentPerformanceBody");
+
+    body.innerHTML = "";
+
+
+    const cls =
+        $("studentClassFilter").value;
+
+    const search =
+        $("studentSearch")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const map = {};
+
+
+    centralResults.forEach(function(x) {
+
+        if (
+            cls &&
+            String(x.className) !==
+            String(cls)
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            search &&
+            !String(x.studentName || "")
+                .toLowerCase()
+                .includes(search)
+        ) {
+
+            return;
+
+        }
+
+
+        const key =
+            [
+                x.studentName,
+                x.className,
+                x.section,
+                x.roll
+            ].join("|");
+
+
+        if (!map[key]) {
+
+            map[key] = {
+
+                student:
+                    x.studentName,
+
+                className:
+                    x.className,
+
+                section:
+                    x.section,
+
+                roll:
+                    x.roll,
+
+                attempts: 0,
+
+                total: 0,
+
+                best: 0
+
+            };
+
+        }
+
+
+        map[key].attempts++;
+
+        map[key].total +=
+            Number(x.score) || 0;
+
+        map[key].best =
+            Math.max(
+                map[key].best,
+                Number(x.score) || 0
+            );
+
+    });
+
+
+    const rows =
+        Object.values(map);
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="7" class="empty-state">' +
+            'No student records found.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.sort(function(a, b) {
+
+        return a.student
+            .localeCompare(
+                b.student
+            );
+
+    });
+
+
+    rows.forEach(function(x) {
+
+        const average =
+            Math.round(
+                x.total / x.attempts
+            );
+
+
+        body.innerHTML +=
+
+            "<tr>" +
+
+            "<td>" +
+            esc(x.student) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.className) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.section) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.roll) +
+            "</td>" +
+
+            "<td>" +
+            x.attempts +
+            "</td>" +
+
+            "<td>" +
+            average +
+            "%</td>" +
+
+            "<td>" +
+            x.best +
+            "%</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   CLASS REPORT
+========================================================= */
+
+function renderClassFilters() {
+
+    const values =
+        uniqueValues("className");
+
+
+    fillSelect(
+        "classReportFilter",
+        values,
+        "All Classes"
+    );
+
+}
+
+
+function renderClassReport() {
+
+    const body =
+        $("classReportBody");
+
+    body.innerHTML = "";
+
+
+    const selected =
+        $("classReportFilter").value;
+
+
+    const map = {};
+
+
+    centralResults.forEach(function(x) {
+
+        if (
+            selected &&
+            String(x.className) !==
+            String(selected)
+        ) {
+
+            return;
+
+        }
+
+
+        const cls =
+            x.className ||
+            "Unknown";
+
+
+        if (!map[cls]) {
+
+            map[cls] = {
+
+                students:
+                    new Set(),
+
+                attempts: 0,
+
+                total: 0,
+
+                best: 0
+
+            };
+
+        }
+
+
+        if (x.studentName) {
+
+            map[cls]
+                .students
+                .add(x.studentName);
+
+        }
+
+
+        map[cls].attempts++;
+
+        map[cls].total +=
+            Number(x.score) || 0;
+
+        map[cls].best =
+            Math.max(
+                map[cls].best,
+                Number(x.score) || 0
+            );
+
+    });
+
+
+    const rows =
+        Object.entries(map);
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="5" class="empty-state">' +
+            'No class records found.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function([cls, x]) {
+
+        const average =
+            Math.round(
+                x.total / x.attempts
+            );
+
+
+        body.innerHTML +=
+
+            "<tr>" +
+
+            "<td>" +
+            esc(cls) +
+            "</td>" +
+
+            "<td>" +
+            x.students.size +
+            "</td>" +
+
+            "<td>" +
+            x.attempts +
+            "</td>" +
+
+            "<td>" +
+            average +
+            "%</td>" +
+
+            "<td>" +
+            x.best +
+            "%</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   STUDENT FEEDBACK
+========================================================= */
+
+function renderStudentFeedback() {
+
+    const body =
+        $("studentFeedbackBody");
+
+    body.innerHTML = "";
+
+
+    const filter =
+        $("feedbackClassFilter")
+            ? $("feedbackClassFilter").value
+            : "";
+
+
+    const data =
+        get(SF);
+
+
+    if ($("totalStudentFeedback")) {
+
+        $("totalStudentFeedback")
+            .textContent =
+            data.length;
+
+    }
+
+
+    fillSelect(
+        "feedbackClassFilter",
+        [
+            ...new Set(
+                data
+                    .map(x =>
+                        x.className ||
+                        x.class ||
+                        ""
+                    )
+                    .filter(Boolean)
+            )
+        ],
+        "All Classes"
+    );
+
+
+    if ($("feedbackClassFilter")) {
+
+        $("feedbackClassFilter").value =
+            filter;
+
+    }
+
+
+    const rows =
+        filter
+            ? data.filter(function(x) {
+
+                return String(
+                    x.className ||
+                    x.class ||
+                    ""
+                ) ===
+                String(filter);
+
+            })
+            : data;
+
+
+    if (!rows.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="8" class="empty-state">' +
+            'No student feedback available on this device.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    rows.forEach(function(x, index) {
+
+        body.innerHTML +=
+
+            "<tr>" +
+
+            "<td>" +
+            esc(
+                displayDate(
+                    x.date ||
+                    x.timestamp
+                )
+            ) +
+            "</td>" +
+
+            "<td>" +
+            esc(
+                x.studentName ||
+                x.name
+            ) +
+            "</td>" +
+
+            "<td>" +
+            esc(
+                x.className ||
+                x.class
+            ) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.activity) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.level) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.rating) +
+            "</td>" +
+
+            "<td>" +
+            esc(
+                x.review ||
+                x.feedback
+            ) +
+            "</td>" +
+
+            "<td>" +
+
+            "<button " +
+            'class="admin-btn admin-btn-danger" ' +
+            'onclick="deleteRecord(\'' +
+            SF +
+            "'," +
+            index +
+            ')">' +
+            "Delete" +
+            "</button>" +
+
+            "</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   TEACHER FEEDBACK
+========================================================= */
+
+function renderTeacherFeedback() {
+
+    const body =
+        $("teacherFeedbackBody");
+
+    body.innerHTML = "";
+
+
+    const data =
+        get(TF);
+
+
+    if ($("totalTeacherFeedback")) {
+
+        $("totalTeacherFeedback")
+            .textContent =
+            data.length;
+
+    }
+
+
+    if (!data.length) {
+
+        body.innerHTML =
+            '<tr><td colspan="6" class="empty-state">' +
+            'No teacher feedback available on this device.' +
+            '</td></tr>';
+
+        return;
+
+    }
+
+
+    data.forEach(function(x, index) {
+
+        body.innerHTML +=
+
+            "<tr>" +
+
+            "<td>" +
+            esc(
+                displayDate(
+                    x.date ||
+                    x.timestamp
+                )
+            ) +
+            "</td>" +
+
+            "<td>" +
+            esc(
+                x.schoolName ||
+                x.school
+            ) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.designation) +
+            "</td>" +
+
+            "<td>" +
+            esc(x.rating) +
+            "</td>" +
+
+            "<td>" +
+            esc(
+                x.feedback ||
+                x.review
+            ) +
+            "</td>" +
+
+            "<td>" +
+
+            "<button " +
+            'class="admin-btn admin-btn-danger" ' +
+            'onclick="deleteRecord(\'' +
+            TF +
+            "'," +
+            index +
+            ')">' +
+            "Delete" +
+            "</button>" +
+
+            "</td>" +
+
+            "</tr>";
+
+    });
+
+}
+
+
+/* =========================================================
+   DELETE CENTRAL ACTIVITY
+========================================================= */
+
+async function deleteActivityById(
+    remoteId
+) {
+
+    if (!remoteId) {
+
+        alert(
+            "This record does not have a central ID."
+        );
+
+        return;
+
+    }
+
+
+    const confirmDelete =
+        confirm(
+            "Delete this activity record permanently?"
+        );
+
+
+    if (!confirmDelete) return;
+
+
+    try {
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/ct_results?id=eq." +
+                encodeURIComponent(
+                    remoteId
+                ),
+                {
+                    method: "DELETE",
+                    headers: {
+                        ...supabaseHeaders(),
+                        "Prefer":
+                            "return=minimal"
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Delete failed: HTTP " +
+                response.status
+            );
+
+        }
+
+
+        await loadCentralResults();
+
+        loadAllViews();
+
+
+        alert(
+            "Activity record deleted successfully."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Could not delete the record.\n\n" +
+            "Check Supabase DELETE policy."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   OLD INDEX COMPATIBILITY
+========================================================= */
+
+function deleteActivity(index) {
+
+    const row =
+        centralResults[index];
+
+
+    if (!row) return;
+
+
+    deleteActivityById(
+        row.remoteId
+    );
+
+}
+
+
+/* =========================================================
+   DELETE FEEDBACK
+========================================================= */
+
+function deleteRecord(
+    key,
+    index
+) {
+
+    const data =
+        get(key);
+
+
+    if (
+        !confirm(
+            "Delete this feedback record?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    data.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(data)
+    );
+
+
+    if (key === SF) {
+
+        renderStudentFeedback();
+
+    }
+
+
+    if (key === TF) {
+
+        renderTeacherFeedback();
+
+    }
+
+
+    renderDashboard();
+
+}
+
+
+/* =========================================================
+   CLEAR CENTRAL ACTIVITY RECORDS
+========================================================= */
+
+async function clearCentralActivityRecords() {
+
+    if (
+        !confirm(
+            "WARNING!\n\n" +
+            "This will permanently delete ALL " +
+            "central activity records from Supabase.\n\n" +
+            "Continue?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/ct_results?id=gt.0",
+                {
+                    method: "DELETE",
+                    headers: {
+                        ...supabaseHeaders(),
+                        "Prefer":
+                            "return=minimal"
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Clear failed: HTTP " +
+                response.status
+            );
+
+        }
+
+
+        centralResults = [];
+
+
+        localStorage.removeItem(RK);
+
+
+        loadAllViews();
+
+
+        alert(
+            "All central activity records cleared."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Could not clear central records.\n\n" +
+            "Check Supabase DELETE policy."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR DATA
+========================================================= */
+
+function clearData(type) {
+
+    if (
+        type === "activity"
+    ) {
+
+        clearCentralActivityRecords();
+
+        return;
+
+    }
+
+
+    let key =
+        type === "studentFeedback"
+            ? SF
+            : TF;
+
+
+    if (
+        !confirm(
+            "Delete all feedback records?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(key);
+
+
+    if (key === SF) {
+
+        renderStudentFeedback();
+
+    }
+
+
+    if (key === TF) {
+
+        renderTeacherFeedback();
+
+    }
+
+
+    renderDashboard();
+
+}
+
+
+/* =========================================================
+   CSV
+========================================================= */
+
+function csv(
+    rows
+) {
+
+    if (!rows.length) {
+
+        return "";
+
+    }
+
+
+    const headers =
+        Object.keys(rows[0]);
+
+
+    const output =
+        [headers];
+
+
+    rows.forEach(function(row) {
+
+        output.push(
+            headers.map(function(header) {
+
+                const value =
+                    row[header] ??
+                    "";
+
+                return '"' +
+                    String(value)
+                        .replace(
+                            /"/g,
+                            '""'
+                        ) +
+                    '"';
+
+            })
+        );
+
+    });
+
+
+    return output
+        .map(row =>
+            row.join(",")
+        )
+        .join("\n");
+
+}
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+function dl(
+    filename,
+    content
+) {
+
+    const blob =
+        new Blob(
+            [content],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href = url;
+
+    a.download =
+        filename;
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* =========================================================
+   EXPORT RESULTS
+========================================================= */
+
+function exportResults() {
+
+    const rows =
+        centralResults.map(function(x) {
+
+            return {
+
+                Date:
+                    displayDate(x.date),
+
+                Student:
+                    x.studentName,
+
+                Class:
+                    x.className,
+
+                Section:
+                    x.section,
+
+                Roll:
+                    x.roll,
+
+                Activity:
+                    x.activityName,
+
+                Level:
+                    x.level,
+
+                Score:
+                    x.score,
+
+                Correct:
+                    x.correct,
+
+                Total:
+                    x.total,
+
+                Time:
+                    time(x.time)
+
+            };
+
+        });
+
+
+    if (!rows.length) {
+
+        alert(
+            "No activity records available."
+        );
+
+        return;
+
+    }
+
+
+    dl(
+        "ct_ai_activity_results.csv",
+        csv(rows)
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT STUDENT FEEDBACK
+========================================================= */
+
+function exportStudentFeedback() {
+
+    const data =
+        get(SF);
+
+
+    if (!data.length) {
+
+        alert(
+            "No student feedback available."
+        );
+
+        return;
+
+    }
+
+
+    const rows =
+        data.map(function(x) {
+
+            return {
+
+                Date:
+                    displayDate(
+                        x.date ||
+                        x.timestamp
+                    ),
+
+                Student:
+                    x.studentName ||
+                    x.name,
+
+                Class:
+                    x.className ||
+                    x.class,
+
+                Activity:
+                    x.activity,
+
+                Level:
+                    x.level,
+
+                Rating:
+                    x.rating,
+
+                Review:
+                    x.review ||
+                    x.feedback
+
+            };
+
+        });
+
+
+    dl(
+        "student_feedback.csv",
+        csv(rows)
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT TEACHER FEEDBACK
+========================================================= */
+
+function exportTeacherFeedback() {
+
+    const data =
+        get(TF);
+
+
+    if (!data.length) {
+
+        alert(
+            "No teacher feedback available."
+        );
+
+        return;
+
+    }
+
+
+    const rows =
+        data.map(function(x) {
+
+            return {
+
+                Date:
+                    displayDate(
+                        x.date ||
+                        x.timestamp
+                    ),
+
+                School:
+                    x.schoolName ||
+                    x.school,
+
+                Designation:
+                    x.designation,
+
+                Rating:
+                    x.rating,
+
+                Feedback:
+                    x.feedback ||
+                    x.review
+
+            };
+
+        });
+
+
+    dl(
+        "teacher_feedback.csv",
+        csv(rows)
+    );
+
+}
+
+
+/* =========================================================
+   LOAD ALL VIEWS
+========================================================= */
+
+function loadAllViews() {
+
+    renderDashboard();
+
+    renderActivityFilters();
+
+    renderActivityReports();
+
+    renderStudentFilters();
+
+    renderStudentPerformance();
+
+    renderClassFilters();
+
+    renderClassReport();
+
+    renderStudentFeedback();
+
+    renderTeacherFeedback();
+
+}
+
+
+/* =========================================================
+   LOAD ALL
+========================================================= */
+
+async function loadAll() {
+
+    await loadCentralResults();
+
+    loadAllViews();
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout() {
+
+    sessionStorage.removeItem(
+        AUTH_KEY
+    );
+
+    location.href =
+        "../index.html#feedback";
+
+}
+
+
+/* =========================================================
+   AUTH CHECK
+========================================================= */
+
+(function initAdmin() {
+
+    const authenticated =
+        sessionStorage.getItem(
+            AUTH_KEY
+        );
+
+
+    if (
+        authenticated !== "true"
+    ) {
+
+        $("blockedScreen")
+            .style.display =
+            "flex";
+
+        $("adminPage")
+            .style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    $("blockedScreen")
+        .style.display =
+        "none";
+
+    $("adminPage")
+        .style.display =
+        "block";
+
+
+    loadAll();
+
+})();
+
+
+</script>
+
+</body>
+</html>
